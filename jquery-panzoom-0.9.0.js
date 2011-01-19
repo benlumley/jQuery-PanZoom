@@ -50,14 +50,21 @@
   var methods = {
 		'init': function (options) {
 			$.extend(settings, $.fn.panZoom.defaults, options);
+  		setupCSS.apply(this);
+			setupData.apply(this);
 			setupBindings.apply(this);
-			setupCSS.apply(this);
-  		setupData.apply(this);
+			loadTargetDimensions.apply(this);
+			methods.readPosition.apply(this);
 		},
 	
 		'destroy': function () {
 			$(window).unbind('.panZoom');
 			this.removeData('panZoom');
+		},
+		
+		'loadImage': function () {
+			loadTargetDimensions.apply(this);
+			methods.updatePosition.apply(this);
 		},
 		
 	  'readPosition': function () {
@@ -142,6 +149,9 @@
 
 		eventData = { target: this }
 		
+		// image load
+		$(this).bind('load.panZoom', eventData, function (event) { event.data.target.panZoom('loadImage') })
+		
 		// controls
 		if (settings.zoomIn) { settings.zoomIn.bind('click.panZoom', eventData, function(event) { event.data.target.panZoom('zoomIn'); } ); }
 		if (settings.zoomOut) { settings.zoomOut.bind('click.panZoom', eventData, function(event) { event.data.target.panZoom('zoomOut'); } ); }
@@ -151,10 +161,8 @@
 		if (settings.panRight) { settings.panRight.bind('click.panZoom', eventData, function(event) { event.data.target.panZoom('panRight'); } ); }
 		if (settings.fit) { settings.fit.bind('click.panZoom', eventData, function(event) { event.data.target.panZoom('fit'); } ); }
 
-		
 		// direct form input
 		if (settings.directedit) {
-			console.log($(settings.out_x1, settings.out_y1, settings.out_x2, settings.out_y2));
 			$(settings.out_x1, settings.out_y1, settings.out_x2, settings.out_y2).bind('change.panZoom keyup.panZoom', eventData, function(event) { event.data.target.panZoom('readPosition') } );
 		}
 		
@@ -163,12 +171,14 @@
 	function setupData() {
 		this.data('panZoom', {
 			target_element: this,
-			target_dimensions: { x: this.width(), y: this.height()  },
+			target_dimensions: { x: null, y: null },
 			viewport_element: this.parent(),
 			viewport_dimensions: { x: this.parent().width(), y: this.parent().height() },
 			position: { x1: null, y1: null, x2: null, y2: null }
-		});		
-		methods.readPosition.apply(this);
+		});
+		if (settings.debug) {
+			console.log(this.data('panZoom'));
+		}
 	}
 
 	function setupCSS() {
@@ -250,4 +260,10 @@
 		return ret;
 	}
   
+	function loadTargetDimensions() {
+		var data = this.data('panZoom');
+		data.target_dimensions.x = this.outerWidth();
+		data.target_dimensions.y = this.outerHeight();
+	}
+
 })( jQuery );
