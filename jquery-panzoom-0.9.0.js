@@ -221,13 +221,15 @@
 		width = data.target_dimensions.x * width_ratio;
 		height = data.target_dimensions.y * height_ratio;
 		
-		left = data.position.x1 * width_ratio;
-		top = data.position.y1 * height_ratio;
+		left_offset = data.position.x1 * width_ratio;
+		top_offset = data.position.y1 * height_ratio;
 		
 		this.height(height);
 		this.width(width);
-		this.css('top', -top);
-		this.css('left', -left);
+		this.css({
+			'top': -top_offset,
+			'left': -left_offset
+		});
 		
 		if (settings.debug) {
 			console.log('width:' + width);
