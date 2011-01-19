@@ -139,7 +139,7 @@
   }
 
 	function setupBindings() {
-		console.log('a');
+
 		eventData = { target: this }
 		
 		// controls
