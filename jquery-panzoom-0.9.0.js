@@ -63,8 +63,13 @@
 		},
 		
 		'loadImage': function () {
+			var data = this.data('panZoom');
 			loadTargetDimensions.apply(this);
 			methods.updatePosition.apply(this);
+			if (data.last_image != null && data.last_image != this.attr('src')) {
+				methods.fit.apply(this);
+			}
+			data.last_image = this.attr('src');
 		},
 		
 	  'readPosition': function () {
@@ -174,7 +179,8 @@
 			target_dimensions: { x: null, y: null },
 			viewport_element: this.parent(),
 			viewport_dimensions: { x: this.parent().width(), y: this.parent().height() },
-			position: { x1: null, y1: null, x2: null, y2: null }
+			position: { x1: null, y1: null, x2: null, y2: null },
+			last_image: null
 		});
 		if (settings.debug) {
 			console.log(this.data('panZoom'));
