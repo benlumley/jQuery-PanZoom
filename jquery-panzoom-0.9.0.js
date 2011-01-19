@@ -262,8 +262,13 @@
   
 	function loadTargetDimensions() {
 		var data = this.data('panZoom');
+		width = this.width();
+		height = this.height();
+		this.css({ 'width': null, 'height': null });
 		data.target_dimensions.x = this.outerWidth();
 		data.target_dimensions.y = this.outerHeight();
+		this.height(height);
+		this.width(width);
 	}
 
 })( jQuery );
