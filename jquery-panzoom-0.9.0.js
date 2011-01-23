@@ -92,28 +92,28 @@
 			var data = this.data('panZoom');
 			data.position.x1 = 0;
 			data.position.y1 = 0;
-			data.position.x2 = data.target_dimensions.x;
-			data.position.y2 = data.target_dimensions.y;
+			data.position.x2 = data.viewport_dimensions.x;
+			data.position.y2 = data.viewport_dimensions.y;
 			methods.updatePosition.apply(this);
 		},
 
 		'zoomIn': function (target) {
 			var data = this.data('panZoom');
 			var steps = getStepDimensions.apply(this);
-			data.position.x1 = data.position.x1*1 + steps.zoom.x;
-			data.position.x2 -= steps.zoom.x;
-			data.position.y1 += data.position.y1*1 + steps.zoom.y;
-			data.position.y2 -= steps.zoom.y;
+			data.position.x1 = data.position.x1*1 - steps.zoom.x;
+			data.position.x2 = data.position.x2*1 + steps.zoom.x;
+			data.position.y1 = data.position.y1*1 - steps.zoom.y;
+			data.position.y2 = data.position.y2*1 + steps.zoom.y;
 			methods.updatePosition.apply(this);
 		 },
 
 		'zoomOut': function () {
 			var data = this.data('panZoom');
 			var steps = getStepDimensions.apply(this);
-			data.position.x1 -= steps.zoom.x;
-			data.position.x2 = data.position.x2*1 + steps.zoom.x;
-			data.position.y1 -= steps.zoom.y;
-			data.position.y2 += data.position.y2*1 + steps.zoom.y;
+			data.position.x1 = data.position.x1*1 + steps.zoom.x;
+			data.position.x2 = data.position.x2*1 - steps.zoom.x;
+			data.position.y1 = data.position.y1*1 + steps.zoom.y;
+			data.position.y2 = data.position.y2*1 - steps.zoom.y;
 			methods.updatePosition.apply(this);
 		 },
 
@@ -128,7 +128,7 @@
 		'panDown': function () {
 			var data = this.data('panZoom');
 			var steps = getStepDimensions.apply(this);
-			data.position.y1 = data.position.y1*1 +steps.pan.y;
+			data.position.y1 = data.position.y1*1 + steps.pan.y;
 			data.position.y2 = data.position.y2*1 + steps.pan.y;
 			methods.updatePosition.apply(this);
 		},
@@ -145,7 +145,7 @@
 			var data = this.data('panZoom');
 			var steps = getStepDimensions.apply(this);
 			data.position.x1 = data.position.x1*1 + steps.pan.x;
-			data.position.x2 = data.position.x1*1 + steps.pan.x;
+			data.position.x2 = data.position.x2*1 + steps.pan.x;
 			methods.updatePosition.apply(this);
 		}
 
@@ -189,7 +189,9 @@
 	}
 
 	function setupCSS() {
-		this.parent().css('position', 'absolute');
+		if (this.parent().css('position') != false) {
+			this.parent().css('position', 'relative');
+		}
 		this.css({
 			'position': 'absolute',
 			'top': 0,
@@ -213,34 +215,22 @@
 			}
 		}
 
-    if (settings.aspect) {
-      console.log('fixing aspect');
-      target_ratio = data.target_dimensions.ratio;
-      console.log(target_ratio);
-      width = getWidth.apply(this);
-      height = getHeight.apply(this);
-      current_ratio = width / height;
-      console.log(current_ratio);
-      if (current_ratio > target_ratio) {
-        console.log('lt');
-        new_width = height * target_ratio;
-        console.log(height);
-        console.log(new_width);
-        diff = width - new_width;
-        diff = diff / getWidthRatio.apply(this);
-        console.log('d: ' + diff);
-        data.position.x1 = data.position.x1*1 - diff/2;
-        data.position.x2 = data.position.x2*1 + diff/2;
-      } else if (current_ratio < target_ratio) {
-        console.log('gt');
-        new_height = width / target_ratio;
-        diff = height - new_height;
-        diff = diff / getHeightRatio.apply(this);
-        console.log('d: ' + diff);
-        data.position.y1 = data.position.y1*1 - diff/2;
-        data.position.y2 = data.position.y2*1 + diff/2;
-      }
-    }
+			//     if (settings.aspect) {
+			//       console.log('fixing aspect');
+			//       
+			// xdiff = data.position.x2 - data.position.x1;
+			// ydiff = data.position.y2 - data.position.y1;
+			// 
+			// if (xdiff > ydiff) {
+			// 	diff = (xdiff - ydiff) / 2;
+			// 	data.position.y1 = data.position.y1*1 - diff;
+			// 	data.position.y2 = data.position.y2*1 + diff;
+			// } else if (xdiff < ydiff) {
+			// 	diff = (ydiff - xdiff) / 2;
+			// 	data.position.x1 = data.position.x1*1 - diff;
+			// 	data.position.x2 = data.position.x2*1 + diff;
+			// }
+			//     }
 
 
 	}
@@ -256,8 +246,8 @@
 		this.height(height);
 		this.width(width);
 		this.css({
-			'top': -top_offset,
-			'left': -left_offset
+			'top': top_offset,
+			'left': left_offset
 		});
 
 		if (settings.debug) {
@@ -268,45 +258,26 @@
 		}
 	}
 
-  function getWidthRatio() {
-		var data = this.data('panZoom');
-		src_width = data.position.x2 - data.position.x1;
-		width_ratio = data.viewport_dimensions.x / data.target_dimensions.x;
-    return width_ratio;
-  }
-
   function getWidth() {
 		var data = this.data('panZoom');
-		width_ratio = getWidthRatio.apply(this);
-    width = (data.position.x2 - data.position.x1) * width_ratio;
+    width = (data.position.x2 - data.position.x1);
     return width;
   }
 
   function getLeftOffset() {
 		var data = this.data('panZoom');
-		width_ratio = getWidthRatio.apply(this);
-		left_offset = data.position.x1 * width_ratio;
-    return left_offset;
-  }
-
-  function getHeightRatio() {
-		var data = this.data('panZoom');
-  	src_height = data.position.y2 - data.position.y1;
-		height_ratio = data.viewport_dimensions.y / data.target_dimensions.y;
-    return height_ratio;
+    return data.position.x1;;
   }
 
   function getHeight() {
 		var data = this.data('panZoom');
-    height_ratio = getHeightRatio.apply(this);
-		height = (data.position.y2 - data.position.y1) * height_ratio;
+		height = (data.position.y2 - data.position.y1);
     return height;
   }
 
   function getTopOffset() {
 		var data = this.data('panZoom');
-    height_ratio = getHeightRatio.apply(this);
-		top_offset = data.position.y1 * height_ratio;
+		top_offset = data.position.y1;
     return top_offset;
   }
 
@@ -322,12 +293,12 @@
 		var data = this.data('panZoom');
 		ret = {
 			zoom: {
-				x: (settings.zoom_step/100 * data.target_dimensions.x),
-				y: (settings.zoom_step/100 * data.target_dimensions.y)
+				x: (settings.zoom_step/100 * data.viewport_dimensions.x),
+				y: (settings.zoom_step/100 * data.viewport_dimensions.y)
 			},
 			pan: {
-				x: (settings.pan_step/100 * data.target_dimensions.x),
-				y: (settings.pan_step/100 * data.target_dimensions.y)
+				x: (settings.pan_step/100 * data.viewport_dimensions.x),
+				y: (settings.pan_step/100 * data.viewport_dimensions.y)
 			}
 		}
     console.log(ret);
