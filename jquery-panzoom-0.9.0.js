@@ -215,22 +215,26 @@
 			}
 		}
 
-			//     if (settings.aspect) {
-			//       console.log('fixing aspect');
-			//       
-			// xdiff = data.position.x2 - data.position.x1;
-			// ydiff = data.position.y2 - data.position.y1;
-			// 
-			// if (xdiff > ydiff) {
-			// 	diff = (xdiff - ydiff) / 2;
-			// 	data.position.y1 = data.position.y1*1 - diff;
-			// 	data.position.y2 = data.position.y2*1 + diff;
-			// } else if (xdiff < ydiff) {
-			// 	diff = (ydiff - xdiff) / 2;
-			// 	data.position.x1 = data.position.x1*1 - diff;
-			// 	data.position.x2 = data.position.x2*1 + diff;
-			// }
-			//     }
+		if (settings.aspect) {
+			console.log('fixing aspect');
+			target = data.target_dimensions.ratio;
+			current = getCurrentAspectRatio.apply(this)
+			console.log(target);
+			console.log(current);
+			if (current > target) {
+				console.log('width fix');
+				new_width = getHeight.apply(this) * target;
+				diff = getWidth.apply(this) - new_width;
+				data.position.x1 = data.position.x1*1 + (diff/2);
+				data.position.x2 = data.position.x2*1 - (diff/2);				
+			} else if (current < target) {
+				console.log('height fix');
+				new_height = getWidth.apply(this) / target;
+				diff = getHeight.apply(this) - new_height;
+				data.position.y1 = data.position.y1*1 + (diff/2);
+				data.position.y2 = data.position.y2*1 - (diff/2);
+			}
+		}
 
 
 	}
@@ -280,6 +284,10 @@
 		top_offset = data.position.y1;
     return top_offset;
   }
+
+	function getCurrentAspectRatio() {
+		return (getWidth.apply(this) / getHeight.apply(this));
+	}
 
 	function writePosition() {
 		var data = this.data('panZoom');
