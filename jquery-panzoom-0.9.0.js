@@ -43,7 +43,8 @@
 			pan_step  :   5,
 			debug			: 	false,
 			directedit:   false,
-      aspect    :   true
+      aspect    :   true,
+      factor    :   1
   };
 
 	var settings = {}
@@ -75,10 +76,10 @@
 
 	  'readPosition': function () {
 				var data = this.data('panZoom');
-		 		if (settings.out_x1) { data.position.x1 = settings.out_x1.val(); }
-		 		if (settings.out_y1) { data.position.y1 = settings.out_y1.val() }
-		 		if (settings.out_x2) { data.position.x2 = settings.out_x2.val() }
-		 		if (settings.out_y2) { data.position.y2 = settings.out_y2.val() }
+		 		if (settings.out_x1) { data.position.x1 = settings.out_x1.val()*settings.factor }
+		 		if (settings.out_y1) { data.position.y1 = settings.out_y1.val()*settings.factor }
+		 		if (settings.out_x2) { data.position.x2 = settings.out_x2.val()*settings.factor }
+		 		if (settings.out_y2) { data.position.y2 = settings.out_y2.val()*settings.factor }
 				methods.updatePosition.apply(this);
 		 },
 
@@ -189,7 +190,7 @@
 	}
 
 	function setupCSS() {
-		if (this.parent().css('position') != false) {
+		if (this.parent().css('position') == 'static') {
 			this.parent().css('position', 'relative');
 		}
 		this.css({
@@ -222,7 +223,7 @@
 				new_width = getHeight.apply(this) * target;
 				diff = getWidth.apply(this) - new_width;
 				data.position.x1 = data.position.x1*1 + (diff/2);
-				data.position.x2 = data.position.x2*1 - (diff/2);				
+				data.position.x2 = data.position.x2*1 - (diff/2);
 			} else if (current < target) {
 				new_height = getWidth.apply(this) / target;
 				diff = getHeight.apply(this) - new_height;
@@ -286,10 +287,10 @@
 
 	function writePosition() {
 		var data = this.data('panZoom');
- 		if (settings.out_x1) { settings.out_x1.val(data.position.x1) }
- 		if (settings.out_y1) { settings.out_y1.val(data.position.y1) }
- 		if (settings.out_x2) { settings.out_x2.val(data.position.x2) }
- 		if (settings.out_y2) { settings.out_y2.val(data.position.y2) }
+ 		if (settings.out_x1) { settings.out_x1.val(data.position.x1 / settings.factor) }
+ 		if (settings.out_y1) { settings.out_y1.val(data.position.y1 / settings.factor) }
+ 		if (settings.out_x2) { settings.out_x2.val(data.position.x2 / settings.factor) }
+ 		if (settings.out_y2) { settings.out_y2.val(data.position.y2 / settings.factor) }
 	}
 
 	function getStepDimensions() {
