@@ -243,18 +243,19 @@
     left_offset = getLeftOffset.apply(this);
     top_offset = getTopOffset.apply(this);
 
-		this.height(height);
-		this.width(width);
+		this.height(Math.round(height));
+		this.width(Math.round(width));
 		this.css({
-			'top': top_offset,
-			'left': left_offset
+			'top': Math.round(top_offset),
+			'left': Math.round(left_offset)
 		});
 
 		if (settings.debug) {
+			console.log('--');
 			console.log('width:' + width);
 			console.log('height:' + height);
-			console.log('left:' + left);
-			console.log('top:' + top);
+			console.log('left:' + left_offset);
+			console.log('top:' + top_offset);
 		}
 	}
 
@@ -266,7 +267,7 @@
 
   function getLeftOffset() {
 		var data = this.data('panZoom');
-    return data.position.x1;;
+    return data.position.x1;
   }
 
   function getHeight() {
@@ -287,10 +288,10 @@
 
 	function writePosition() {
 		var data = this.data('panZoom');
- 		if (settings.out_x1) { settings.out_x1.val(data.position.x1 / settings.factor) }
- 		if (settings.out_y1) { settings.out_y1.val(data.position.y1 / settings.factor) }
- 		if (settings.out_x2) { settings.out_x2.val(data.position.x2 / settings.factor) }
- 		if (settings.out_y2) { settings.out_y2.val(data.position.y2 / settings.factor) }
+ 		if (settings.out_x1) { settings.out_x1.val(Math.round(data.position.x1 / settings.factor)) }
+ 		if (settings.out_y1) { settings.out_y1.val(Math.round(data.position.y1 / settings.factor)) }
+ 		if (settings.out_x2) { settings.out_x2.val(Math.round(data.position.x2 / settings.factor)) }
+ 		if (settings.out_y2) { settings.out_y2.val(Math.round(data.position.y2 / settings.factor)) }
 	}
 
 	function getStepDimensions() {
