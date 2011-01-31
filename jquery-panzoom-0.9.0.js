@@ -55,7 +55,6 @@
   		setupCSS.apply(this);
 			setupData.apply(this);
 			setupBindings.apply(this);
-			loadTargetDimensions.apply(this);
 			methods.readPosition.apply(this);
 		},
 
@@ -202,7 +201,6 @@
 
 	function validatePosition() {
 		var data = this.data('panZoom');
-
 		// if dimensions are zero...
 		if ( data.position.x2 - data.position.x1 < 1 || data.position.y2 - data.position.y1 < 1 ) {
 			// and second co-ords are zero (IE: no dims set), fit image
@@ -311,14 +309,14 @@
 
 	function loadTargetDimensions() {
 		var data = this.data('panZoom');
-		width = this.width();
-		height = this.height();
-		this.css({ 'width': null, 'height': null });
-		data.target_dimensions.x = this.outerWidth();
-		data.target_dimensions.y = this.outerHeight();
+		var img = document.createElement('img');
+    img.src = this.attr('src');
+    img.id = "jqpz-temp";
+    $('body').append(img);
+    data.target_dimensions.x = $('#jqpz-temp').width();
+		data.target_dimensions.y = $('#jqpz-temp').height();
+    $('#jqpz-temp').remove();
     data.target_dimensions.ratio = data.target_dimensions.x / data.target_dimensions.y;
-		this.height(height);
-		this.width(width);
 	}
 
 })( jQuery );
