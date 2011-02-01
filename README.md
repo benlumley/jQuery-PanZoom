@@ -72,7 +72,7 @@ Pass in jQuery dom nodes for the form elements to read/write the position of the
 
 ### zoom\_step, pan\_step (5, 5)
 
-Percentage of the image's dimensions to zoom/pan at once. In short, increase to make the plugin zoom/pan in larger steps, and vice versa
+Percentage of the image's dimensions to zoom/pan at once when the controls are clicked. In short, increase to make the plugin zoom/pan in larger steps, and vice versa
 
 ### debug
 
@@ -103,6 +103,18 @@ If animate\_enabled is true, duration for the animations  - passed directly into
 ### animate\_easing (linear)
 
 If animate\_enabled is true, easing method for the animations  - passed directly into jQuery's animate method.
+
+### double_click (true)
+
+Boolean - whether double clicking the image should trigger zoom in.
+
+### mousewheel
+
+Boolean - whether to enable mousewheel to zoom or not. Requires mousewheel from jquery tools - http://flowplayer.org/tools/toolbox/mousewheel.html
+
+### mousewheel_delta (1)
+
+Amount of mousewheel movement thats equivalent to one click of the zoom button. Be warned that this seems to be influenced by browser choice as well as people's settings for their mousewheel in their operating system.
 
 # Methods #
 
