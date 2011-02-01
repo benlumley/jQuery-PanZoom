@@ -32,7 +32,19 @@ Then initialise the plugin by calling (best to use $(document).ready() for this,
     	$('#pan img').panZoom(options);
     });
 
-You need to pass some options for the plugin to do anything - see below. So a working example might be
+You need to pass some options for the plugin to do anything - see below. So a working example might be (see below for an explanation of options):
+
+    $(document).ready(function () {
+    	$('#pan img').panZoom({
+    	  'zoomIn'   	: 	$('#zoomin'),
+    	  'zoomOut' 	: 	$('#zoomout'),
+    	  'panUp'		  :		$('#panup'),
+    	  'panDown'		:		$('#pandown'),
+    	  'panLeft'		:		$('#panleft'),
+    	  'panRight'	:		$('#panright'),
+    	  'fit'       :   $('#fit')
+    	});
+    });
 
 # A Note On How PanZoom Handles Co Ordinates #
 
