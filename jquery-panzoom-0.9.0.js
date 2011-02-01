@@ -216,7 +216,7 @@
 		// direct form input
 		if (settings.directedit) {
 			console.log('bindy');
-			$(settings.out_x1, settings.out_y1, settings.out_x2, settings.out_y2).bind('change.panZoom keyup.panZoom', eventData, function(event) { event.data.target.panZoom('readPosition') } );
+			$(settings.out_x1).add(settings.out_y1).add(settings.out_x2).add(settings.out_y2).bind('change.panZoom blur.panZoom', eventData, function(event) { event.data.target.panZoom('readPosition') } );
 		}
 		
 		if (settings.draggable && typeof(this.draggable) == 'function') {
