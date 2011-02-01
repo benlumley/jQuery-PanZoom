@@ -18,6 +18,7 @@ div.me img {
 }
 
 div#pan {
+	border: #dddddd 1px solid;
 	width: 400px;
 	height: 270px;
 	overflow: hidden;
