@@ -52,6 +52,8 @@ The plugin stores and outputs the position of the top left corner of the image a
 
 # Options #
 
+Where appropriate, defaults are given in brackets.
+
 ### zoomIn, zoomOut, panUp,  panDown, panLeft, panRight,
 
 Pass a (different) jQuery dom node in to each of these options, the relevant action will be bound to the click event of that element. EG: 
@@ -68,7 +70,7 @@ Pass in a jQuery dom node to bind the fit action to. This can be thought of as a
 
 Pass in jQuery dom nodes for the form elements to read/write the position of the image from. The plugin will initialise using the values in these fields if valid.
 
-### zoom\_step, pan\_step
+### zoom\_step, pan\_step (5, 5)
 
 Percentage of the image's dimensions to zoom/pan at once. In short, increase to make the plugin zoom/pan in larger steps, and vice versa
 
@@ -76,17 +78,29 @@ Percentage of the image's dimensions to zoom/pan at once. In short, increase to 
 
 The plugin will console.log the current co-ordinates. Beware, will break things if console.log isn't available in your browser.
 
-### directedit
+### directedit (false)
 
 Boolean. If true, the form will monitor the form fields passed in to out_x1 etc for changes and will update the image accordingly. Probably best used with form fields that aren't hidden :) 
 
-### aspect
+### aspect (true)
 
 boolean, whether the plugin should keep the original aspect ratio (length/width) of the source image.
 
-### factor
+### factor (1)
 
 Pass a number in here if you wish to have the plugin scale up/down the values used in the form fields relative to the actual pixel offsets of the image within the div.
+
+### animate (false)
+
+Boolean - whether to animate the zoom in/out, pan actions, or just change them. (jQuery's css method or animate method). For animate, see following two options.
+
+### animate\_duration (500)
+
+If animate\_enabled is true, duration for the animations  - passed directly into jQuery's animate method.
+
+### animate\_easing (linear)
+
+If animate\_enabled is true, easing method for the animations  - passed directly into jQuery's animate method.
 
 # Methods #
 

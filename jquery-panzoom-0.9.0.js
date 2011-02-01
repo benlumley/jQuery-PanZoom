@@ -28,23 +28,26 @@
   };
 
 	$.fn.panZoom.defaults = {
-      zoomIn   	: 	false,
-      zoomOut 	: 	false,
-		  panUp			:		false,
-		  panDown		:		false,
-		  panLeft		:		false,
-		  panRight	:		false,
-			fit				: 	false,
-		  out_x1		:		false,
-		  out_y1		:		false,
-		  out_x2		:		false,
-		  out_y2		:		false,
-			zoom_step	:   5,
-			pan_step  :   5,
-			debug			: 	false,
-			directedit:   false,
-      aspect    :   true,
-      factor    :   1
+      zoomIn   					: 	false,
+      zoomOut 					: 	false,
+		  panUp							:		false,
+		  panDown						:		false,
+		  panLeft						:		false,
+		  panRight					:		false,
+			fit								: 	false,
+		  out_x1						:		false,
+		  out_y1						:		false,
+		  out_x2						:		false,
+		  out_y2						:		false,
+			zoom_step					:   5,
+			pan_step  				:   5,
+			debug							: 	false,
+			directedit				:   false,
+      aspect    				:   true,
+      factor    				:   1,
+		  animate   				:   false,
+			animate_duration	: 	500,
+		 	animate_easing		: 	'linear'
   };
 
 	var settings = {}
@@ -240,13 +243,19 @@
     height = getHeight.apply(this);
     left_offset = getLeftOffset.apply(this);
     top_offset = getTopOffset.apply(this);
-
-		this.height(Math.round(height));
-		this.width(Math.round(width));
-		this.css({
+		
+		properties = {
 			'top': Math.round(top_offset),
-			'left': Math.round(left_offset)
-		});
+			'left': Math.round(left_offset),
+			'width': Math.round(width),
+			'height': Math.round(height)
+		}
+		
+		if (settings.animate) {
+			applyAnimate.apply(this, [ properties ]);
+		} else {
+			applyCSS.apply(this, [ properties ]);
+		}
 
 		if (settings.debug) {
 			console.log('--');
@@ -255,6 +264,14 @@
 			console.log('left:' + left_offset);
 			console.log('top:' + top_offset);
 		}
+	}
+	
+	function applyCSS() {
+		this.css(	properties );
+	}
+	
+	function applyAnimate() {
+		this.animate(	properties , settings.animate, settings.animate_easing);		
 	}
 
   function getWidth() {
