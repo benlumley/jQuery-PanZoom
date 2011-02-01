@@ -6,7 +6,7 @@
  * @requires jQuery v1.4.2 or later (earlier probably work, but untested so far)
  *
  * Copyright (c) 2011 Ben Lumley
- * Examples and documentation at: http://benlumley.co.uk/jquery/panzoom
+ * Examples and documentation at: https://github.com/benlumley/jQuery-PanZoom
  *
  * Dual licensed under the MIT and GPL licenses:
  *   http://www.opensource.org/licenses/mit-license.php
