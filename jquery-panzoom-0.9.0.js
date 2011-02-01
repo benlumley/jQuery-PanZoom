@@ -50,7 +50,8 @@
 		 	animate_easing		: 	'linear',
 			double_click	 		: 	true,
 			mousewheel				: 	true,
-			mousewheel_delta	: 	1
+			mousewheel_delta	: 	1,
+			draggable					:   true
   };
 
 	var settings = {}
@@ -173,6 +174,15 @@
 			} else if (delta < 0) {
 				methods.zoomOut.apply(this, [steps]);
 			}
+		},
+		
+		'dragComplete': function() {
+			var data = this.data('panZoom');
+			data.position.x1 = this.position().left;
+			data.position.y1 = this.position().top;
+			data.position.x2 = this.position().left*1 + this.width();
+			data.position.y2 = this.position().top*1 + this.height();
+			methods.updatePosition.apply(this);
 		}
 
   }
@@ -198,7 +208,6 @@
 			this.bind('dblclick.panZoom', eventData, function(event, delta) { event.data.target.panZoom('zoomIn') } );
 		}
 		
-
 		// mousewheel
 		if (settings.mousewheel && typeof(this.mousewheel) == 'function') {
 			this.mousewheel(function(event, delta) { $(this).panZoom('mouseWheel', delta) } );
@@ -207,6 +216,12 @@
 		// direct form input
 		if (settings.directedit) {
 			$(settings.out_x1, settings.out_y1, settings.out_x2, settings.out_y2).bind('change.panZoom keyup.panZoom', eventData, function(event) { event.data.target.panZoom('readPosition') } );
+		}
+		
+		if (settings.draggable && typeof(this.draggable) == 'function') {
+			this.draggable({
+				stop: function () { $(this).panZoom('dragComplete');	}
+			});
 		}
 
 	}
