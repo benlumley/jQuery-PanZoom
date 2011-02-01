@@ -120,5 +120,13 @@ You can manually change the image position using something like:
     
 (yes, a utility method for this would be nicer/cleaner. Its on the list!)
 
+## Feature Wishlist
+
+Few extra utility methods
+Mousewheel to zoom
+Dragging to move image
+Animation (vs "jumping")
+Rotation (supported browsers only)
+
 
 
