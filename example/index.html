@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<title>jQuery PanZoom Example</title>
+		<title>jQuery PanZoom Example - by Ben Lumley</title>
 		
 	  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script> 
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js"></script>
@@ -42,36 +42,70 @@
 			</p>
 		</div>
 		
+		<div id="controls">
+			<h2>Controls</h2>
+			<div class="clear"></div>
+			<h3>Zoom</h3>
+			<a id="zoomin" href="#">
+				<img src="icons/zoom_in.png"><br />
+				Zoom In
+			</a>
+			<a id="zoomout" href="#">
+				<img src="icons/zoom_out.png"><br />
+				Zoom Out
+			</a>
+			<div class="clear"></div>
+			<h3>Pan</h3>
+			<a id="panup" href="#">
+				<img src="icons/arrow_up.png"><br />
+				Pan Up
+			</a>
+			<a id="pandown" href="#">
+				<img src="icons/arrow_down.png"><br />
+				Pan Down
+			</a>
+			<a id="panleft" href="#">
+				<img src="icons/arrow_left.png"><br />
+				Pan Left
+			</a>
+			<a id="panright" href="#">
+				<img src="icons/arrow_right.png"><br />
+				Pan Right
+			</a>
+			<div class="clear"></div>
+			<h3>Fit</h3>
+			<a id="fit" href="#">
+				<img src="icons/arrow_out.png"><br />
+				Fit/Reset
+			</a>      
+			<div class="clear"></div>
+			<h3>Other Controls</h3>
+			<p>You can also drag the image around or zoom with your mousewheel when hovering. Double click will zoom too.</p>
+		</div>
+
 		<div id="pan">
 			<img src="sample2.jpg">
 		</div>
 		
-		<div id="controls">
-			<h4>Controls</h4>
-			<small>You can also drag the image around or zoom with your mousewheel when hovering. Double click will zoom too.</small>
-			<a id="zoomin" href="#">Zoom In</a>
-			<a id="zoomout" href="#">Zoom Out</a>
-			<br /><br />
-			<a id="panup" href="#">Pan Up</a>
-			<a id="pandown" href="#">Pan Down</a>
-			<a id="panleft" href="#">Pan Left</a>
-			<a id="panright" href="#">Pan Right</a>
-			<br /><br />
-			<a id="fit" href="#">Fit/Reset</a>      
-			<br />
-		</div>
+		<div class="clear"></div>
 		
 		<div id="output">
-			<h4>Output</h4>
-			
-			X1: <input type="text" name="x1" value="0" id="x1"><br />
-			Y1: <input type="text" name="y1" value="0" id="y1"><br />
-			X2: <input type="text" name="x2" value="0" id="x2"><br />
-			Y2: <input type="text" name="y2" value="0" id="y2"><br />
-			
+			<h2>Output</h2>
+			<p>View the current co-ordinates live. You will probably want hidden fields, but whilst they are visible, try changing the numbers.</p>
+			<table>
+				<tr>
+					<td>x1: <input type="text" name="x1" value="0" id="x1"></td><td>x2: <input type="text" name="x2" value="0" id="x2"></td>
+				</tr>
+				<tr>
+					<td>y1: <input type="text" name="y1" value="0" id="y1"></td><td>y2: <input type="text" name="y2" value="0" id="y2"></td>
+				</tr>
+			</table>			
 		</div>
+		<div class="clear"></div>
 		<div class="atribution">
+			<h2>Attribution</h2>
 		  <p>Example images from flickr user kevindooley <a href="http://www.flickr.com/photos/pagedooley/3777170527">here</a> and <a href="http://www.flickr.com/photos/pagedooley/5401706245/">here</a>, licensed under Creative Commons Attribution 2.0 Generic</p>
+			<p>Icons from <a href="http://www.famfamfam.com/lab/icons/silk/">http://www.famfamfam.com/lab/icons/silk/</a>
 		</div>
 	
 	</body>
