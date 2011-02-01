@@ -90,9 +90,11 @@ boolean, whether the plugin should keep the original aspect ratio (length/width)
 
 Pass a number in here if you wish to have the plugin scale up/down the values used in the form fields relative to the actual pixel offsets of the image within the div.
 
-### animate (false)
+### animate (true)
 
 Boolean - whether to animate the zoom in/out, pan actions, or just change them. (jQuery's css method or animate method). For animate, see following two options.
+
+NB: Animate doesn't start until the plugin has initialised the first image properly, as doing so lets the user see the initial image shrinking etc, rather than it appearing instant. 
 
 ### animate\_duration (500)
 

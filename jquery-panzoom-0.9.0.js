@@ -45,7 +45,7 @@
 			directedit				:   false,
       aspect    				:   true,
       factor    				:   1,
-		  animate   				:   false,
+		  animate   				:   true,
 			animate_duration	: 	500,
 		 	animate_easing		: 	'linear'
   };
@@ -74,6 +74,7 @@
         methods.fit.apply(this);
 			}
 			data.last_image = this.attr('src');
+			data.loaded = true;
 		},
 
 	  'readPosition': function () {
@@ -184,7 +185,8 @@
 			viewport_element: this.parent(),
 			viewport_dimensions: { x: this.parent().width(), y: this.parent().height() },
 			position: { x1: null, y1: null, x2: null, y2: null },
-			last_image: null
+			last_image: null,
+			loaded: false
 		});
 		if (settings.debug) {
 			console.log(this.data('panZoom'));
@@ -251,7 +253,7 @@
 			'height': Math.round(height)
 		}
 		
-		if (settings.animate) {
+		if (data.loaded && settings.animate) {
 			applyAnimate.apply(this, [ properties ]);
 		} else {
 			applyCSS.apply(this, [ properties ]);
