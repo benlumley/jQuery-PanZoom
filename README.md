@@ -116,6 +116,10 @@ Boolean - whether to enable mousewheel to zoom or not. Requires mousewheel from 
 
 Amount of mousewheel movement thats equivalent to one click of the zoom button. Be warned that this seems to be influenced by browser choice as well as people's settings for their mousewheel in their operating system.
 
+### draggable (true)
+
+Should the image be made "draggable"? Requires jQuery UI - http://jqueryui.com/
+
 # Methods #
 
 // todo :(
