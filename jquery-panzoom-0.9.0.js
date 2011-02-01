@@ -46,8 +46,11 @@
       aspect    				:   true,
       factor    				:   1,
 		  animate   				:   true,
-			animate_duration	: 	500,
-		 	animate_easing		: 	'linear'
+			animate_duration	: 	250,
+		 	animate_easing		: 	'linear',
+			double_click	 		: 	true,
+			mousewheel				: 	true,
+			mousewheel_delta	: 	1
   };
 
 	var settings = {}
@@ -101,9 +104,11 @@
 			methods.updatePosition.apply(this);
 		},
 
-		'zoomIn': function (target) {
+		'zoomIn': function (steps) {
 			var data = this.data('panZoom');
-			var steps = getStepDimensions.apply(this);
+			if (typeof(steps) == 'undefined') {
+				var steps = getStepDimensions.apply(this);
+			}
 			data.position.x1 = data.position.x1*1 - steps.zoom.x;
 			data.position.x2 = data.position.x2*1 + steps.zoom.x;
 			data.position.y1 = data.position.y1*1 - steps.zoom.y;
@@ -111,9 +116,11 @@
 			methods.updatePosition.apply(this);
 		 },
 
-		'zoomOut': function () {
+		'zoomOut': function (steps) {
 			var data = this.data('panZoom');
-			var steps = getStepDimensions.apply(this);
+			if (typeof(steps) == 'undefined') {
+				var steps = getStepDimensions.apply(this);
+			}
 			data.position.x1 = data.position.x1*1 + steps.zoom.x;
 			data.position.x2 = data.position.x2*1 - steps.zoom.x;
 			data.position.y1 = data.position.y1*1 + steps.zoom.y;
@@ -151,6 +158,21 @@
 			data.position.x1 = data.position.x1*1 + steps.pan.x;
 			data.position.x2 = data.position.x2*1 + steps.pan.x;
 			methods.updatePosition.apply(this);
+		},
+
+		'mouseWheel': function (delta) {
+
+			// first calculate how much to zoom in/out
+			var steps = getStepDimensions.apply(this);		
+			steps.zoom.x = steps.zoom.x * (Math.abs(delta) / settings.mousewheel_delta);
+			steps.zoom.y = steps.zoom.y * (Math.abs(delta) / settings.mousewheel_delta);
+			
+			// then do it
+			if (delta > 0) {
+				methods.zoomIn.apply(this, [steps]);
+			} else if (delta < 0) {
+				methods.zoomOut.apply(this, [steps]);
+			}
 		}
 
   }
@@ -171,6 +193,17 @@
 		if (settings.panRight) { settings.panRight.bind('click.panZoom', eventData, function(event) { event.data.target.panZoom('panRight'); } ); }
 		if (settings.fit) { settings.fit.bind('click.panZoom', eventData, function(event) { event.data.target.panZoom('fit'); } ); }
 
+		// double click
+		if (settings.double_click) {
+			this.bind('dblclick.panZoom', eventData, function(event, delta) { event.data.target.panZoom('zoomIn') } );
+		}
+		
+
+		// mousewheel
+		if (settings.mousewheel && typeof(this.mousewheel) == 'function') {
+			this.mousewheel(function(event, delta) { $(this).panZoom('mouseWheel', delta) } );
+		}
+
 		// direct form input
 		if (settings.directedit) {
 			$(settings.out_x1, settings.out_y1, settings.out_x2, settings.out_y2).bind('change.panZoom keyup.panZoom', eventData, function(event) { event.data.target.panZoom('readPosition') } );
@@ -186,7 +219,8 @@
 			viewport_dimensions: { x: this.parent().width(), y: this.parent().height() },
 			position: { x1: null, y1: null, x2: null, y2: null },
 			last_image: null,
-			loaded: false
+			loaded: false,
+			mousewheel_delta: 0
 		});
 		if (settings.debug) {
 			console.log(this.data('panZoom'));
@@ -273,7 +307,7 @@
 	}
 	
 	function applyAnimate() {
-		this.animate(	properties , settings.animate, settings.animate_easing);		
+		this.animate(	properties , settings.animate_duration, settings.animate_easing);		
 	}
 
   function getWidth() {
