@@ -30,7 +30,7 @@ div.me img {
 div#pan {
 	border: #dddddd 1px solid;
 	width: 400px;
-	height: 270px;
+	height: 310px;
 	overflow: hidden;
 }
 
@@ -44,7 +44,7 @@ div.me {
 	margin-bottom: 20px;
 }
 
-div#controls, div#output {
+div#controls, div#output, div#images {
 	width: 380px;
 	float: left;
 	border: #dddddd 1px solid;
@@ -52,6 +52,10 @@ div#controls, div#output {
 	padding: 10px;
 	margin-right: 10px;
 	margin-bottom: 20px;
+}
+
+div#controls {
+	height: 290px;
 }
 
 div#controls a {
@@ -73,6 +77,15 @@ div#controls a img {
 
 div#controls a:hover {
 	text-decoration: underline;
+}
+
+div#output, div#images {
+	height: 150px;
+}
+
+div#images {
+	float: left;
+	margin-right: 0;
 }
 
 div#attribution {

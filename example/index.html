@@ -24,6 +24,12 @@
 				  'directedit':   true,
 				  'debug'     :   false
 				});
+				
+				// init the image switcher
+				$('#images img').bind('click', function () {
+					$('#pan img').attr('src', $(this).attr('src'));
+				});
+				
 			});
 		</script>
 	</head>
@@ -36,9 +42,9 @@
 			<img src="https://secure.gravatar.com/avatar/97fd695f2843e74355ed065489179417?s=80" alt="benlumley">
 			<p>
 				jQuery PanZoom by Ben Lumley <br />
-				<a href="http://www.twitter.com/benlumley" target="_top">@benlumley</a><br />
-				<a href="http://benlumley.co.uk/" target="_top">http://benlumley.co.uk/</a> <br />
-				<a href="https://github.com/benlumley/jQuery-PanZoom" target="_top">https://github.com/benlumley/jQuery-PanZoom</a>
+				<a href="http://www.twitter.com/benlumley" target="_blank">@benlumley</a><br />
+				<a href="http://benlumley.co.uk/" target="_blank">http://benlumley.co.uk/</a> <br />
+				<a href="https://github.com/benlumley/jQuery-PanZoom" target="_blank">https://github.com/benlumley/jQuery-PanZoom</a>
 			</p>
 		</div>
 		
@@ -82,12 +88,6 @@
 			<h3>Other Controls</h3>
 			<p>You can also drag the image around or zoom with your mousewheel when hovering. Double click will zoom too.</p>
 		</div>
-
-		<div id="pan">
-			<img src="sample2.jpg">
-		</div>
-		
-		<div class="clear"></div>
 		
 		<div id="output">
 			<h2>Output</h2>
@@ -101,10 +101,25 @@
 				</tr>
 			</table>			
 		</div>
+
+		<div id="pan">
+			<img src="sample2.jpg">
+		</div>
+		
+		<div id="images">
+			<h3>Switch Images</h3>
+			<p>Click an image below to switch the image above to it.</p>
+			<img src="sample.jpg" width="100" height="67">
+			<img src="sample2.jpg" width="100" height="67">
+			<img src="sample3.jpg" width="100" height="67">			
+		</div>
+		
+		<div class="clear"></div>
+		
 		<div class="clear"></div>
 		<div class="atribution">
 			<h2>Attribution</h2>
-		  <p>Example images from flickr user kevindooley <a href="http://www.flickr.com/photos/pagedooley/3777170527">here</a> and <a href="http://www.flickr.com/photos/pagedooley/5401706245/">here</a>, licensed under Creative Commons Attribution 2.0 Generic</p>
+		  <p>Example images from flickr user kevindooley <a href="http://www.flickr.com/photos/pagedooley/3777170527" target="_blank">here</a>, <a href="http://www.flickr.com/photos/pagedooley/5401706245/" target="_blank">here</a> and <a href="http://www.flickr.com/photos/pagedooley/5402307136/in/photostream/" target="_blank">here</a>, licensed under Creative Commons Attribution 2.0 Generic</p>
 			<p>Icons from <a href="http://www.famfamfam.com/lab/icons/silk/">http://www.famfamfam.com/lab/icons/silk/</a>
 		</div>
 	
