@@ -212,7 +212,7 @@
 		
 		// mousewheel
 		if (settings.mousewheel && typeof(this.mousewheel) == 'function') {
-			this.parent().mousewheel(function(event, delta) { $(this).find('img').panZoom('mouseWheel', delta) } );
+			this.parent().mousewheel(function(event, delta) { event.preventDefault(); $(this).find('img').panZoom('mouseWheel', delta) } );
 		}
 
 		// direct form input
