@@ -48,7 +48,7 @@
       aspect    				:   true,
       factor    				:   1,
 		  animate   				:   true,
-			animate_duration	: 	250,
+			animate_duration	: 	200,
 		 	animate_easing		: 	'linear',
 			double_click	 		: 	true,
 			mousewheel				: 	true,
@@ -328,7 +328,7 @@
 	}
 	
 	function applyAnimate() {
-		this.animate(	properties , settings.animate_duration, settings.animate_easing);		
+		this.stop().animate(	properties , settings.animate_duration, settings.animate_easing);		
 	}
 
   function getWidth() {

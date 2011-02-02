@@ -102,7 +102,7 @@ Boolean - whether to animate the zoom in/out, pan actions, or just change them. 
 
 NB: Animate doesn't start until the plugin has initialised the first image properly, as doing so lets the user see the initial image shrinking etc, rather than it appearing instant. 
 
-### animate\_duration (500)
+### animate\_duration (200)
 
 If animate\_enabled is true, duration for the animations  - passed directly into jQuery's animate method.
 
