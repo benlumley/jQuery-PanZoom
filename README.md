@@ -76,6 +76,10 @@ Pass in jQuery dom nodes for the form elements to read/write the position of the
 
 Percentage of the image's dimensions to zoom/pan at once when the controls are clicked. In short, increase to make the plugin zoom/pan in larger steps, and vice versa
 
+### min\_width, min\_height (20, 20)
+
+The width/height of the image (according to the output co-ordinates) can't be less than the respective value here.
+
 ### debug
 
 The plugin will console.log the current co-ordinates. Beware, will break things if console.log isn't available in your browser.
@@ -158,6 +162,7 @@ You can manually change the image position using something like:
 
 Few extra utility methods  
 Rotation (supported browsers only)  
-
+Min and max size
+Draggable snap
 
 

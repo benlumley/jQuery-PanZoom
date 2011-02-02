@@ -39,6 +39,8 @@
 		  out_y1						:		false,
 		  out_x2						:		false,
 		  out_y2						:		false,
+			min_width					:   20,
+			min_height 				:   20,
 			zoom_step					:   5,
 			pan_step  				:   5,
 			debug							: 	false,
@@ -215,7 +217,6 @@
 
 		// direct form input
 		if (settings.directedit) {
-			console.log('bindy');
 			$(settings.out_x1).add(settings.out_y1).add(settings.out_x2).add(settings.out_y2).bind('change.panZoom blur.panZoom', eventData, function(event) { event.data.target.panZoom('readPosition') } );
 		}
 		
@@ -257,15 +258,15 @@
 	function validatePosition() {
 		var data = this.data('panZoom');
 		// if dimensions are zero...
-		if ( data.position.x2 - data.position.x1 < 1 || data.position.y2 - data.position.y1 < 1 ) {
+		if ( data.position.x2 - data.position.x1 < settings.min_width || data.position.y2 - data.position.y1 < settings.min_height ) {
 			// and second co-ords are zero (IE: no dims set), fit image
 			if (data.position.x2 == 0 || data.position.y2 == 0) {
 				methods.fit.apply(this);
 			}
 			// otherwise, backout a bit
 			else {
-				data.position.x2 = data.position.x1*1+1;
-	  		data.position.y2 = data.position.y1*1+1;
+				data.position.x2 = data.position.x1*1+settings.min_width;
+	  		data.position.y2 = data.position.y1*1+settings.min_height;
 			}
 		}
 
