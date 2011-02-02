@@ -2,7 +2,7 @@
 
 Pan and zoom an image within a parent div. Plugin can also read/write the co-ordinates of the image within the parent div to/from a (probably hidden) form field for easy integration into your own projects.
 
-Live example available at: http://benlumley.co.uk/dev/panzoom/example/index.html
+Live example available at: [http://benlumley.co.uk/dev/panzoom/example/index.html](http://benlumley.co.uk/dev/panzoom/example/index.html)
 
 # Licence #
 
@@ -157,9 +157,6 @@ You can manually change the image position using something like:
 ## Feature Wishlist
 
 Few extra utility methods  
-Mousewheel to zoom  
-Dragging to move image  
-Animation (vs "jumping")  
 Rotation (supported browsers only)  
 
 
