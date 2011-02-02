@@ -257,16 +257,20 @@
 
 	function validatePosition() {
 		var data = this.data('panZoom');
-		// if dimensions are zero...
-		if ( data.position.x2 - data.position.x1 < settings.min_width || data.position.y2 - data.position.y1 < settings.min_height ) {
+		// if dimensions are too small...
+		if ( data.position.x2 - data.position.x1 < settings.min_width/settings.factor || data.position.y2 - data.position.y1 < settings.min_height/settings.factor ) {
 			// and second co-ords are zero (IE: no dims set), fit image
 			if (data.position.x2 == 0 || data.position.y2 == 0) {
 				methods.fit.apply(this);
 			}
 			// otherwise, backout a bit
 			else {
-				data.position.x2 = data.position.x1*1+settings.min_width;
-	  		data.position.y2 = data.position.y1*1+settings.min_height;
+				if (data.position.x2 - data.position.x1 < settings.min_width/settings.factor) {
+					data.position.x2 = data.position.x1*1+settings.min_width/settings.factor;
+				}
+				if (data.position.y2 - data.position.y1 < settings.min_height/settings.factor) {
+	  			data.position.y2 = data.position.y1*1+settings.min_height/settings.factor;
+				}
 			}
 		}
 
