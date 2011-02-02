@@ -1,17 +1,19 @@
 # Summary #
 
-Pan and zoom an image within a parent div. Plugin can also read/write the co-ordinates of the image within the parent div to/from a (probably hidden) form field for easy integration into your own projects.
+Pan and zoom an image within a parent div using any combination of buttons (anything you can bind a click to), mousewheel and drag/drop.
+
+Plugin can also read/write the co-ordinates of the image within the parent div to/from a (probably hidden) form field for easy integration into your own projects.
 
 Live example available at: [http://benlumley.co.uk/dev/panzoom/example/index.html](http://benlumley.co.uk/dev/panzoom/example/index.html)
 
 # Licence #
 
 Copyright (c) 2011 Ben Lumley  
-Examples and documentation at: https://github.com/benlumley/jQuery-PanZoom  
+Examples and documentation at: [https://github.com/benlumley/jQuery-PanZoom](https://github.com/benlumley/jQuery-PanZoom])  
 
 Dual licensed under the MIT and GPL licenses:  
- http://www.opensource.org/licenses/mit-license.php  
- http://www.gnu.org/licenses/gpl.html
+ [http://www.opensource.org/licenses/mit-license.php](http://www.opensource.org/licenses/mit-license.php)  
+ [http://www.gnu.org/licenses/gpl.html](http://www.gnu.org/licenses/gpl.html)
 
 # Usage #
 
