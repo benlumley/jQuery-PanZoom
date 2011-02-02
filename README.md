@@ -2,6 +2,8 @@
 
 Pan and zoom an image within a parent div. Plugin can also read/write the co-ordinates of the image within the parent div to/from a (probably hidden) form field for easy integration into your own projects.
 
+Live example available at: http://benlumley.co.uk/dev/panzoom/example/index.html
+
 # Licence #
 
 Copyright (c) 2011 Ben Lumley  

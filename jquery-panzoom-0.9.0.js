@@ -195,13 +195,13 @@
 		$(this).bind('load.panZoom', eventData, function (event) { event.data.target.panZoom('loadImage') })
 
 		// controls
-		if (settings.zoomIn) { settings.zoomIn.bind('click.panZoom', eventData, function(event) { event.data.target.panZoom('zoomIn'); } ); }
-		if (settings.zoomOut) { settings.zoomOut.bind('click.panZoom', eventData, function(event) { event.data.target.panZoom('zoomOut'); } ); }
-		if (settings.panUp) { settings.panUp.bind('click.panZoom', eventData, function(event) { event.data.target.panZoom('panUp'); } ); }
-		if (settings.panDown) { settings.panDown.bind('click.panZoom', eventData, function(event) { event.data.target.panZoom('panDown'); } ); }
-		if (settings.panLeft) { settings.panLeft.bind('click.panZoom', eventData, function(event) { event.data.target.panZoom('panLeft'); } ); }
-		if (settings.panRight) { settings.panRight.bind('click.panZoom', eventData, function(event) { event.data.target.panZoom('panRight'); } ); }
-		if (settings.fit) { settings.fit.bind('click.panZoom', eventData, function(event) { event.data.target.panZoom('fit'); } ); }
+		if (settings.zoomIn) { settings.zoomIn.bind('click.panZoom', eventData, function(event) { event.preventDefault(); event.data.target.panZoom('zoomIn'); } ); }
+		if (settings.zoomOut) { settings.zoomOut.bind('click.panZoom', eventData, function(event) { event.preventDefault(); event.data.target.panZoom('zoomOut'); } ); }
+		if (settings.panUp) { settings.panUp.bind('click.panZoom', eventData, function(event) { event.preventDefault(); event.data.target.panZoom('panUp'); } ); }
+		if (settings.panDown) { settings.panDown.bind('click.panZoom', eventData, function(event) { event.preventDefault(); event.data.target.panZoom('panDown'); } ); }
+		if (settings.panLeft) { settings.panLeft.bind('click.panZoom', eventData, function(event) { event.preventDefault(); event.data.target.panZoom('panLeft'); } ); }
+		if (settings.panRight) { settings.panRight.bind('click.panZoom', eventData, function(event) { event.preventDefault(); event.data.target.panZoom('panRight'); } ); }
+		if (settings.fit) { settings.fit.bind('click.panZoom', eventData, function(event) { event.preventDefault(); event.data.target.panZoom('fit'); } ); }
 
 		// double click
 		if (settings.double_click) {
