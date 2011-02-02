@@ -162,7 +162,8 @@ You can manually change the image position using something like:
 
 Few extra utility methods  
 Rotation (supported browsers only)  
-Min and max size
 Draggable snap
+Moz hand draggy cursor
+Fix diving to corner as you zoom out past limits
 
 
