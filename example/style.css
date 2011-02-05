@@ -1,9 +1,12 @@
 body {
 	margin-top: 20px;
 	margin-left: 30px;
-	width: 820px;
 	color: #222222;
 	font-size: 14px;
+}
+
+div.wrapper {
+	width: 820px;
 }
 
 h1 {
@@ -36,6 +39,12 @@ div#pan {
 
 /* and this is the end */
 
+/* this is extra stuff for #pan to get the layout right for the eg - not necessary */
+div#pan {
+  float: right;
+  margin-bottom: 20px;
+}
+
 div.me {
 	font-size: 12px;
 	width: 400px;
@@ -46,7 +55,6 @@ div.me {
 
 div#controls, div#output, div#images {
 	width: 380px;
-	float: left;
 	border: #dddddd 1px solid;
 	background-color: #eeeeee;
 	padding: 10px;
@@ -59,15 +67,13 @@ div#controls {
 }
 
 div#controls a {
-	display: block;
+	display: inline-block;
 	text-align: center;
-	width: 95px;
+	width: 90px;
 	height: 40px;
-	float: left;
 	font-size: 12px;
 	color: #0000CC;
 	text-decoration: none;
-
 }
 
 div#controls a img {
@@ -84,7 +90,8 @@ div#output, div#images {
 }
 
 div#images {
-	float: left;
+	float: right;
+  clear: right;
 	margin-right: 0;
 }
 
