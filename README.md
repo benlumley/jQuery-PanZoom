@@ -27,7 +27,7 @@ Include jquery and the plugin's js files.
 If you want to enable the mousewheel setting you need jQuery tools' mousewheel tool, and draggable needs jQuery UI:
 
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js"></script>
-		<script type="text/javascript" src="http://cdn.jquerytools.org/1.2.5/all/jquery.tools.min.js"></script>
+    <script type="text/javascript" src="http://cdn.jquerytools.org/1.2.5/all/jquery.tools.min.js"></script>
 
 First, you need a div with a width and height specified, and inside that place the image. This becomes the area within which your image can be panned and zoomed. Create html thats something like this:
 
@@ -44,15 +44,15 @@ Then initialise the plugin by calling (best to use $(document).ready() for this,
 You need to pass some options for the plugin to do anything - see below. So a working example might be (see below for an explanation of options):
 
     $(document).ready(function () {
-    	$('#pan img').panZoom({
-    	  'zoomIn'   	: 	$('#zoomin'),
-    	  'zoomOut' 	: 	$('#zoomout'),
-    	  'panUp'		  :		$('#panup'),
-    	  'panDown'		:		$('#pandown'),
-    	  'panLeft'		:		$('#panleft'),
-    	  'panRight'	:		$('#panright'),
-    	  'fit'       :   $('#fit')
-    	});
+      $('#pan img').panZoom({
+        'zoomIn'    :  $('#zoomin'),
+        'zoomOut'   :  $('#zoomout'),
+        'panUp'     :  $('#panup'),
+        'panDown'   :  $('#pandown'),
+        'panLeft'   :  $('#panleft'),
+        'panRight'  :  $('#panright'),
+        'fit'       :  $('#fit')
+      });
     });
 
 # A Note On How PanZoom Handles Co Ordinates #
