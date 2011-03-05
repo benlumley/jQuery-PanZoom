@@ -169,8 +169,7 @@ You can manually change the image position using something like:
 Few extra utility methods  
 Rotation (supported browsers only)  
 Draggable snap  
-Moz hand draggy cursor  
 Fix diving to corner as you zoom out past limits  
 Zoom should zoom the image towards the point that is currently at center of viewport - currently it zooms to center of image wherever that may be, so if zoomed in, it effectively pans for you.   
-Click controls should loop while mouse down 
+
 

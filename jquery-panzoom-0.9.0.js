@@ -314,6 +314,11 @@
 			'top': 0,
 			'left': 0
 		});
+		if (settings.draggable) {
+			this.css({
+				'cursor': 'move'
+			});
+		}
 	}
 
 	function validatePosition() {
