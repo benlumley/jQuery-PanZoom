@@ -24,6 +24,11 @@ Include jquery and the plugin's js files.
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
     <script type="text/javascript" src="/js/jquery-panzoom-0.9.0.js"></script>
 
+If you want to enable the mousewheel setting you need jQuery tools' mousewheel tool, and draggable needs jQuery UI:
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="http://cdn.jquerytools.org/1.2.5/all/jquery.tools.min.js"></script>
+
 First, you need a div with a width and height specified, and inside that place the image. This becomes the area within which your image can be panned and zoomed. Create html thats something like this:
 
     <div id="pan" style="width: 200px; height: 300px;">
