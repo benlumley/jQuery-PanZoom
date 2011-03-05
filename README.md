@@ -134,7 +134,13 @@ Should the zoom/pan controls contine to zoom/pan for as long as you click on the
 
 # Public Methods #
 
-Methods can all be called via $(selector).panZoom('methodname', arg1, arg2)
+Methods can all be called via 
+
+    $(selector).panZoom('methodname', arg1, arg2)
+
+Which would call
+
+    methodname(arg1, arg2)
 
 ### panLeft, panRight, panUp, panDown
 
@@ -142,13 +148,13 @@ These are the methods used by the event handlers for the relevant controls. You 
 
 ### zoomIn( [steps] ), zoomOut( [steps] )
 
-Similar to the above, these are the methods used by the event hanlers for zoom in/out and can be called directly. 
+Similar to the above, these are the methods used by the event handlers for zoom in/out and can be called directly. 
 
 They take an optional steps argument, which dictates how far will be zoomed in and out. If not provided, a default is used based on the size of the image panZoom is working with and the zoom\_step config value passed when you initialised panZoom.
 
 Steps should be an object like look like:
 
-    {
+		{
 			zoom: {
 				x: 10,
 				y: 10
@@ -157,9 +163,41 @@ Steps should be an object like look like:
 
 The units represent the amount to increment/decrement the x1,y1,x2,y2 values by.
 
+### mouseWheel(delta)
+
+This is the handler for mousewheel events. It takes one argument, delta, which represents the amount and direction of mouse movement.
+
 ### fit
 
-This is used for the reset handler. It will re-center the image in the containing div and will size it as large as possible, respecting the aspect if approprate (according to the settings).
+This is used for the reset handler. It will re-center the image in the containing div and will size it as large as possible, respecting the aspect if appropriate (according to the settings).
+
+### readPosition
+
+Forces panZoom to reload co-ordinates from the output form fields. Useful to call after manually setting position, and is bound to the change and blur events if directedit is enabled.
+
+### dragComplete
+
+This is called after a drag event, hence it's name. It reads the co-ordinates of the image from css top, left, width and height and applies them to the output fields. 
+
+### updatePosition
+
+Re-applies the internal co-ordinates in the data object to the output form fields and sets the image position accordingly. Useful if you have directly manipulated the current image co-ordinates in the data object to force panZoom to apply the new co-ordinates.
+
+### loadImage
+
+Bound to the main image's change event - possibly of little use aside from this - causes panZoom to re-read the image size, and fit the image if it's changed.
+
+### destroy
+
+Removes the panZoom instance.
+
+### mouseDown(action, [arg1, arg2])
+
+This is a wrapper method used to call other methods via setInterval to provide the clickandhold functionality. It takes a method (action) to call - eg: 'panUp' and optional arguments to pass to it. It calls this once and then uses javascript's setInterval to repeatedly call it if clickandhold is enabled.
+
+### mouseUp
+
+Clears the setInterval from mouseDown. Bound to the mouseleave and mouseup events of relevant controls.
 
 # Tips #
 
@@ -173,7 +211,7 @@ the plugin will automatically fit the new image to the box once it loads.
 
 ## Manually setting image position ##
 
-You can manually change the image position using something like:
+You can manually change the image position from javascript using something like:
 
     // retrieve the current position
     data = $('#pan img').data('panZoom');
@@ -189,6 +227,8 @@ You can manually change the image position using something like:
     
 (yes, a utility method for this would be nicer/cleaner. Its on the list!)
 
+You could also do this via the directedit setting and changing the form field values.
+
 ## Feature Wishlist
 
 Few extra utility methods  
@@ -196,5 +236,6 @@ Rotation (supported browsers only)
 Draggable snap  
 Fix diving to corner as you zoom out past limits  
 Zoom should zoom the image towards the point that is currently at center of viewport - currently it zooms to center of image wherever that may be, so if zoomed in, it effectively pans for you.   
-
+Detect draggable and mousewheel
+Verify destroy
 
