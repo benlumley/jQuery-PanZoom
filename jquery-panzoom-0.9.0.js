@@ -209,10 +209,7 @@
 	function setupBindings() {
 
 		eventData = { target: this }
-
-		// image load
-		$(this).bind('load.panZoom', eventData, function (event) { event.data.target.panZoom('loadImage') })
-
+		
 		// bind up controls
 		if (settings.zoomIn) { 
 			settings.zoomIn.bind('mousedown.panZoom', eventData, function(event) { 
@@ -272,6 +269,8 @@
 		// mousewheel
 		if (settings.mousewheel && typeof(this.mousewheel) == 'function') {
 			this.parent().mousewheel(function(event, delta) { event.preventDefault(); $(this).find('img').panZoom('mouseWheel', delta) } );
+		} else if (settings.mousewheel) {
+			alert('Mousewheel requires mousewheel from jQuery tools - please include jQuery tools or disable mousewheel to remove this warning.')
 		}
 
 		// direct form input
@@ -283,8 +282,13 @@
 			this.draggable({
 				stop: function () { $(this).panZoom('dragComplete');	}
 			});
+		}	else if (settings.draggable) {
+				alert('Draggable requires jQuery UI - please include jQuery UI or disable draggable to remove this warning.')
 		}
-
+		
+		// image load
+		$(this).bind('load.panZoom', eventData, function (event) { event.data.target.panZoom('loadImage') })
+		
 	}
 
 	function setupData() {
