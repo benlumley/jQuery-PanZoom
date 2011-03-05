@@ -41,8 +41,8 @@
 		  out_y2						:		false,
 			min_width					:   20,
 			min_height 				:   20,
-			zoom_step					:   5,
-			pan_step  				:   5,
+			zoom_step					:   3,
+			pan_step  				:   3,
 			debug							: 	false,
 			directedit				:   false,
       aspect    				:   true,
@@ -53,7 +53,8 @@
 			double_click	 		: 	true,
 			mousewheel				: 	true,
 			mousewheel_delta	: 	1,
-			draggable					:   true
+			draggable					:   true,
+			clickandhold			: 	true 
   };
 
 	var settings = {}
@@ -185,6 +186,23 @@
 			data.position.x2 = this.position().left*1 + this.width();
 			data.position.y2 = this.position().top*1 + this.height();
 			methods.updatePosition.apply(this);
+		},
+		
+		'mouseDown': function (action) {
+			methods[action].apply(this);
+			
+			if (settings.clickandhold) {
+				var data = this.data('panZoom');
+				methods.mouseUp.apply(this);
+				data.mousedown_interval = window.setInterval(function (that, action) {
+					that.panZoom(action);
+				}, settings.animate_duration, this, action);
+			}
+		},
+		
+		'mouseUp': function() {
+			var data = this.data('panZoom');
+			window.clearInterval(data.mousedown_interval);
 		}
 
   }
@@ -196,13 +214,55 @@
 		// image load
 		$(this).bind('load.panZoom', eventData, function (event) { event.data.target.panZoom('loadImage') })
 
-		// controls
-		if (settings.zoomIn) { settings.zoomIn.bind('click.panZoom', eventData, function(event) { event.preventDefault(); event.data.target.panZoom('zoomIn'); } ); }
-		if (settings.zoomOut) { settings.zoomOut.bind('click.panZoom', eventData, function(event) { event.preventDefault(); event.data.target.panZoom('zoomOut'); } ); }
-		if (settings.panUp) { settings.panUp.bind('click.panZoom', eventData, function(event) { event.preventDefault(); event.data.target.panZoom('panUp'); } ); }
-		if (settings.panDown) { settings.panDown.bind('click.panZoom', eventData, function(event) { event.preventDefault(); event.data.target.panZoom('panDown'); } ); }
-		if (settings.panLeft) { settings.panLeft.bind('click.panZoom', eventData, function(event) { event.preventDefault(); event.data.target.panZoom('panLeft'); } ); }
-		if (settings.panRight) { settings.panRight.bind('click.panZoom', eventData, function(event) { event.preventDefault(); event.data.target.panZoom('panRight'); } ); }
+		// bind up controls
+		if (settings.zoomIn) { 
+			settings.zoomIn.bind('mousedown.panZoom', eventData, function(event) { 
+				event.preventDefault(); event.data.target.panZoom('mouseDown', 'zoomIn'); 
+			}).bind('mouseleave.panZoom mouseup.panZoom', eventData, function(event) {
+				event.preventDefault(); event.data.target.panZoom('mouseUp');
+			});
+		}
+		
+		if (settings.zoomOut) { 
+			settings.zoomOut.bind('mousedown.panZoom', eventData, function(event) { 
+				event.preventDefault(); event.data.target.panZoom('mouseDown', 'zoomOut'); 
+			}).bind('mouseleave.panZoom mouseup.panZoom', eventData, function(event) {
+				event.preventDefault(); event.data.target.panZoom('mouseUp');
+			}); 
+		}
+		
+		if (settings.panUp) { 
+			settings.panUp.bind('mousedown.panZoom', eventData, function(event) { 
+				event.preventDefault(); event.data.target.panZoom('mouseDown', 'panUp'); 
+			}).bind('mouseleave.panZoom mouseup.panZoom', eventData, function(event) {
+				event.preventDefault(); event.data.target.panZoom('mouseUp');
+			}); 
+		}
+		
+		if (settings.panDown) { 
+			settings.panDown.bind('mousedown.panZoom', eventData, function(event) { 
+				event.preventDefault(); event.data.target.panZoom('mouseDown', 'panDown'); 
+			}).bind('mouseleave.panZoom mouseup.panZoom', eventData, function(event) {
+				event.preventDefault(); event.data.target.panZoom('mouseUp');
+			});
+		}
+		
+		if (settings.panLeft) { 
+			settings.panLeft.bind('mousedown.panZoom', eventData, function(event) { 
+				event.preventDefault(); event.data.target.panZoom('mouseDown', 'panLeft'); 
+			}).bind('mouseleave.panZoom mouseup.panZoom', eventData, function(event) {
+				event.preventDefault(); event.data.target.panZoom('mouseUp');
+			}); 
+		}
+		
+		if (settings.panRight) { 
+			settings.panRight.bind('mousedown.panZoom', eventData, function(event) { 
+				event.preventDefault(); event.data.target.panZoom('mouseDown', 'panRight'); 
+			}).bind('mouseleave.panZoom mouseup.panZoom', eventData, function(event) {
+				event.preventDefault(); event.data.target.panZoom('mouseUp');
+			});
+		}
+			
 		if (settings.fit) { settings.fit.bind('click.panZoom', eventData, function(event) { event.preventDefault(); event.data.target.panZoom('fit'); } ); }
 
 		// double click
@@ -237,7 +297,8 @@
 			position: { x1: null, y1: null, x2: null, y2: null },
 			last_image: null,
 			loaded: false,
-			mousewheel_delta: 0
+			mousewheel_delta: 0,
+			mousedown_interval: false
 		});
 		if (settings.debug) {
 			console.log(this.data('panZoom'));

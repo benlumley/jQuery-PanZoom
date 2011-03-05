@@ -128,6 +128,10 @@ Amount of mousewheel movement thats equivalent to one click of the zoom button. 
 
 Should the image be made "draggable"? Requires jQuery UI - http://jqueryui.com/
 
+### clickandhold (true)
+
+Should the zoom/pan controls contine to zoom/pan for as long as you click on the control? If false, each click causes one pan/zoom step.
+
 # Methods #
 
 // todo :(
