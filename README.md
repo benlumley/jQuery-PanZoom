@@ -241,6 +241,5 @@ Rotation (supported browsers only)
 Draggable snap  
 Fix diving to corner as you zoom out past limits  
 Zoom should zoom the image towards the point that is currently at center of viewport - currently it zooms to center of image wherever that may be, so if zoomed in, it effectively pans for you.   
-Detect draggable and mousewheel
 Verify destroy
 
