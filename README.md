@@ -74,7 +74,7 @@ Pass in a jQuery dom node to bind the fit action to. This can be thought of as a
 
 Pass in jQuery dom nodes for the form elements to read/write the position of the image from. The plugin will initialise using the values in these fields if valid.
 
-### zoom\_step, pan\_step (5, 5)
+### zoom\_step, pan\_step (3, 3)
 
 Percentage of the image's dimensions to zoom/pan at once when the controls are clicked. In short, increase to make the plugin zoom/pan in larger steps, and vice versa
 
@@ -132,9 +132,34 @@ Should the image be made "draggable"? Requires jQuery UI - http://jqueryui.com/
 
 Should the zoom/pan controls contine to zoom/pan for as long as you click on the control? If false, each click causes one pan/zoom step.
 
-# Methods #
+# Public Methods #
 
-// todo :(
+Methods can all be called via $(selector).panZoom('methodname', arg1, arg2)
+
+### panLeft, panRight, panUp, panDown
+
+These are the methods used by the event handlers for the relevant controls. You can make manual calls to these or bind them to extra elements to integrate panZoom into more complicated interfaces.
+
+### zoomIn( [steps] ), zoomOut( [steps] )
+
+Similar to the above, these are the methods used by the event hanlers for zoom in/out and can be called directly. 
+
+They take an optional steps argument, which dictates how far will be zoomed in and out. If not provided, a default is used based on the size of the image panZoom is working with and the zoom\_step config value passed when you initialised panZoom.
+
+Steps should be an object like look like:
+
+    {
+			zoom: {
+				x: 10,
+				y: 10
+			}
+		}
+
+The units represent the amount to increment/decrement the x1,y1,x2,y2 values by.
+
+### fit
+
+This is used for the reset handler. It will re-center the image in the containing div and will size it as large as possible, respecting the aspect if approprate (according to the settings).
 
 # Tips #
 

@@ -165,7 +165,6 @@
 		},
 
 		'mouseWheel': function (delta) {
-
 			// first calculate how much to zoom in/out
 			var steps = getStepDimensions.apply(this);		
 			steps.zoom.x = steps.zoom.x * (Math.abs(delta) / settings.mousewheel_delta);
