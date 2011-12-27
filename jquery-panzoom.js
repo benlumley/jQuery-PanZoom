@@ -75,9 +75,6 @@
       if (settings.draggable && typeof(this.draggable) == 'function') {
         this.draggable('destroy');
       }
-      if (settings.mousewheel && typeof(this.mousewheel) == 'function') {
-        this.parent().unbind('mousewheel');
-      }
 			this.removeData('panZoom');
 		},
 
@@ -292,7 +289,8 @@
 		
 		// mousewheel
 		if (settings.mousewheel && typeof(this.mousewheel) == 'function') {
-			this.parent().mousewheel(function(event, delta) { event.preventDefault(); $(this).find('img').panZoom('mouseWheel', delta) } );
+			this.parent().bind('wheel.panZoom', function(event, delta) { event.preventDefault(); $(this).find('img').panZoom('mouseWheel', delta) } );
+      data.bound_elements = data.bound_elements.add(this.parent());
 		} else if (settings.mousewheel) {
 			alert('Mousewheel requires mousewheel from jQuery tools - please include jQuery tools or disable mousewheel to remove this warning.')
 		}
