@@ -75,6 +75,10 @@ If you don't pass in at least one of these options, the plugin won't be able to 
 
 Pass in a jQuery dom node to bind the fit action to. This can be thought of as a reset button, it will center the image within the div and size it as large as possible within the div.
 
+### destroy
+
+Pass in a jQuery dom node to bind the destroy method to - this is documented below, but in short it de-initialises panZoom.
+
 ### out\_x1, out\_y1, out\_x2, out\_y2
 
 Pass in jQuery dom nodes for the form elements to read/write the position of the image from. The plugin will initialise using the values in these fields if valid.
@@ -194,7 +198,7 @@ Bound to the main image's change event - possibly of little use aside from this 
 
 ### destroy
 
-Removes the panZoom instance.
+Removes the panZoom instance - should restore everything to it's pre-panZoom state by removing bound events and stored data. It will not reset the position of the main image or remove co-ordinates written out to any elements passed in via the out_\* options.
 
 ### mouseDown(action, [arg1, arg2])
 
