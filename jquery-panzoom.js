@@ -289,10 +289,10 @@
 		
 		// mousewheel
 		if (settings.mousewheel && typeof(this.mousewheel) == 'function') {
-			this.parent().bind('wheel.panZoom', function(event, delta) { event.preventDefault(); $(this).find('img').panZoom('mouseWheel', delta) } );
+			this.parent().bind('mousewheel.panZoom', function(event, delta) { event.preventDefault(); $(this).find('img').panZoom('mouseWheel', delta) } );
       data.bound_elements = data.bound_elements.add(this.parent());
 		} else if (settings.mousewheel) {
-			alert('Mousewheel requires mousewheel from jQuery tools - please include jQuery tools or disable mousewheel to remove this warning.')
+			alert('Mousewheel requires jquery-mousewheel by Brandon Aaron (https://github.com/brandonaaron/jquery-mousewheel) - please include it or disable mousewheel to remove this warning.')
 		}
 
 		// direct form input
