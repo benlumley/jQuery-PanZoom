@@ -10,28 +10,42 @@
 		<link rel="stylesheet" type="text/css" media="screen" href="style.css" />
 		<script type="text/javascript">
 			$(document).ready(function () {
-				$('#pan img').panZoom({
-				  'zoomIn'   	: 		$('#zoomin'),
-				  'zoomOut' 	: 		$('#zoomout'),
-				  'panUp'		  :		$('#panup'),
-				  'panDown'		:		$('#pandown'),
-				  'panLeft'		:		$('#panleft'),
-				  'panRight'	:		$('#panright'),
-				  'fit'       :   $('#fit'),
-				  'destroy'   :   $('#destroy'),
-				  'out_x1'    :   $('#x1'),
-				  'out_y1'    :   $('#y1'),
-				  'out_x2'    :   $('#x2'),
-				  'out_y2'    :   $('#y2'),
-				  'directedit':   true,
-				  'debug'     :   false
-				});
-				
+        function initPanZoom() {
+          $('#pan img').panZoom({
+            'zoomIn'   	: 		$('#zoomin'),
+            'zoomOut' 	: 		$('#zoomout'),
+            'panUp'		  :		$('#panup'),
+            'panDown'		:		$('#pandown'),
+            'panLeft'		:		$('#panleft'),
+            'panRight'	:		$('#panright'),
+            'fit'       :   $('#fit'),
+            'destroy'   :   $('#destroy'),
+            'out_x1'    :   $('#x1'),
+            'out_y1'    :   $('#y1'),
+            'out_x2'    :   $('#x2'),
+            'out_y2'    :   $('#y2'),
+            'directedit':   true,
+            'debug'     :   false
+          });
+        };
+
+        initPanZoom();
+
 				// init the image switcher
 				$('#images img').bind('click', function () {
 					$('#pan img').attr('src', $(this).attr('src'));
 				});
-				
+
+        // init the init button (for testing destroy/recreate)
+        $('#reinit').bind('click', function (event) {
+          if ($('#pan img').data('panZoom')) {
+            alert('Click destroy before trying to re-initialise panZoom');
+            return;
+          }
+          event.preventDefault();
+          initPanZoom();
+        });
+
 			});
 		</script>
 	</head>
@@ -101,6 +115,10 @@
         <a id="destroy" href="#">
           <img src="icons/cross.png"><br />
           destroy
+        </a>
+        <a id="reinit" href="#">
+          <img src="icons/tick.png"><br />
+          re-initialise
         </a>
 
         <h3>Other Controls</h3>
