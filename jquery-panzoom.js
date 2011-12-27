@@ -75,6 +75,9 @@
       if (settings.draggable && typeof(this.draggable) == 'function') {
         this.draggable('destroy');
       }
+      if (settings.mousewheel && typeof(this.mousewheel) == 'function') {
+        this.parent().unbind('mousewheel');
+      }
 			this.removeData('panZoom');
 		},
 
