@@ -35,6 +35,7 @@
 		  panLeft						:		false,
 		  panRight					:		false,
 			fit								: 	false,
+		  destroy           :   false,
 		  out_x1						:		false,
 		  out_y1						:		false,
 		  out_x2						:		false,
@@ -69,7 +70,8 @@
 		},
 
 		'destroy': function () {
-			$(window).unbind('.panZoom');
+			var data = this.data('panZoom');
+			data.bound_elements.unbind('.panZoom');
 			this.removeData('panZoom');
 		},
 
@@ -209,14 +211,16 @@
 	function setupBindings() {
 
 		eventData = { target: this }
-		
+    var data = this.data('panZoom');
+
 		// bind up controls
 		if (settings.zoomIn) { 
 			settings.zoomIn.bind('mousedown.panZoom', eventData, function(event) { 
 				event.preventDefault(); event.data.target.panZoom('mouseDown', 'zoomIn'); 
 			}).bind('mouseleave.panZoom mouseup.panZoom', eventData, function(event) {
 				event.preventDefault(); event.data.target.panZoom('mouseUp');
-			}).bind('click', function (event) { event.preventDefault() } );
+			}).bind('click.panZoom', function (event) { event.preventDefault() } );
+      data.bound_elements = data.bound_elements.add(settings.zoomIn);
 		}
 		
 		if (settings.zoomOut) { 
@@ -224,7 +228,8 @@
 				event.preventDefault(); event.data.target.panZoom('mouseDown', 'zoomOut'); 
 			}).bind('mouseleave.panZoom mouseup.panZoom', eventData, function(event) {
 				event.preventDefault(); event.data.target.panZoom('mouseUp');
-			}).bind('click', function (event) { event.preventDefault() } );
+			}).bind('click.panZoom', function (event) { event.preventDefault() } );
+      data.bound_elements = data.bound_elements.add(settings.zoomOut);
 		}
 		
 		if (settings.panUp) { 
@@ -232,7 +237,8 @@
 				event.preventDefault(); event.data.target.panZoom('mouseDown', 'panUp'); 
 			}).bind('mouseleave.panZoom mouseup.panZoom', eventData, function(event) {
 				event.preventDefault(); event.data.target.panZoom('mouseUp');
-			}).bind('click', function (event) { event.preventDefault() } ); 
+			}).bind('click.panZoom', function (event) { event.preventDefault() } ); 
+      data.bound_elements = data.bound_elements.add(settings.panUp);
 		}
 		
 		if (settings.panDown) { 
@@ -240,7 +246,8 @@
 				event.preventDefault(); event.data.target.panZoom('mouseDown', 'panDown'); 
 			}).bind('mouseleave.panZoom mouseup.panZoom', eventData, function(event) {
 				event.preventDefault(); event.data.target.panZoom('mouseUp');
-			}).bind('click', function (event) { event.preventDefault() } );
+			}).bind('click.panZoom', function (event) { event.preventDefault() } );
+      data.bound_elements = data.bound_elements.add(settings.panDown);
 		}
 		
 		if (settings.panLeft) { 
@@ -248,7 +255,8 @@
 				event.preventDefault(); event.data.target.panZoom('mouseDown', 'panLeft'); 
 			}).bind('mouseleave.panZoom mouseup.panZoom', eventData, function(event) {
 				event.preventDefault(); event.data.target.panZoom('mouseUp');
-			}).bind('click', function (event) { event.preventDefault() } ); 
+			}).bind('click.panZoom', function (event) { event.preventDefault() } ); 
+      data.bound_elements = data.bound_elements.add(settings.panLeft);
 		}
 		
 		if (settings.panRight) { 
@@ -256,14 +264,24 @@
 				event.preventDefault(); event.data.target.panZoom('mouseDown', 'panRight'); 
 			}).bind('mouseleave.panZoom mouseup.panZoom', eventData, function(event) {
 				event.preventDefault(); event.data.target.panZoom('mouseUp');
-			}).bind('click', function (event) { event.preventDefault() } );
+			}).bind('click.panZoom', function (event) { event.preventDefault() } );
+      data.bound_elements = data.bound_elements.add(settings.panRight);
 		}
 			
-		if (settings.fit) { settings.fit.bind('click.panZoom', eventData, function(event) { event.preventDefault(); event.data.target.panZoom('fit'); } ); }
+		if (settings.fit) { 
+		  settings.fit.bind('click.panZoom', eventData, function(event) { event.preventDefault(); event.data.target.panZoom('fit'); } ); 
+      data.bound_elements = data.bound_elements.add(settings.fit);
+		}
+
+    if (settings.destroy) {
+      settings.destroy.bind('click.panZoom', eventData, function(event) { event.preventDefault(); event.data.target.panZoom('destroy'); } ); 
+      data.bound_elements = data.bound_elements.add(settings.destroy);
+    }
 
 		// double click
 		if (settings.double_click) {
 			this.bind('dblclick.panZoom', eventData, function(event, delta) { event.data.target.panZoom('zoomIn') } );
+			// no need to record in bound elements array - gets done anyway when imageload is bound
 		}
 		
 		// mousewheel
@@ -276,6 +294,7 @@
 		// direct form input
 		if (settings.directedit) {
 			$(settings.out_x1).add(settings.out_y1).add(settings.out_x2).add(settings.out_y2).bind('change.panZoom blur.panZoom', eventData, function(event) { event.data.target.panZoom('readPosition') } );
+		  data.bound_elements = data.bound_elements.add($(settings.out_x1).add(settings.out_y1).add(settings.out_x2).add(settings.out_y2));
 		}
 		
 		if (settings.draggable && typeof(this.draggable) == 'function') {
@@ -288,7 +307,8 @@
 		
 		// image load
 		$(this).bind('load.panZoom', eventData, function (event) { event.data.target.panZoom('loadImage') })
-		
+    data.bound_elements = data.bound_elements.add(this);
+
 	}
 
 	function setupData() {
@@ -301,7 +321,8 @@
 			last_image: null,
 			loaded: false,
 			mousewheel_delta: 0,
-			mousedown_interval: false
+			mousedown_interval: false,
+			bound_elements: $()
 		});
 		if (settings.debug) {
 			console.log(this.data('panZoom'));
