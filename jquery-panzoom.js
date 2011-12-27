@@ -72,6 +72,9 @@
 		'destroy': function () {
 			var data = this.data('panZoom');
 			data.bound_elements.unbind('.panZoom');
+      if (settings.draggable && typeof(this.draggable) == 'function') {
+        this.draggable('destroy');
+      }
 			this.removeData('panZoom');
 		},
 
