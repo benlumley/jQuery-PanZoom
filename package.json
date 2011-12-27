@@ -1,0 +1,47 @@
+{
+    "name": "PanZoom",
+    "version": "0.10.0",
+    "title": "jQuery.Color()",
+    "author": {
+        "name": "Ben Lumley",
+        "url": "http://benlumley.co.uk"
+    },
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "http://www.opensource.org/licenses/mit-license.php"
+        },
+        {
+            "type": "GPL",
+            "url": "http://www.gnu.org/licenses/gpl.html"
+        }
+    ],
+    "dependencies": {
+        "jquery": ">1.4"
+    },
+    "description": "Pan and zoom an image within a parent div using any combination of buttons (anything you can bind a click to), mousewheel and drag/drop.
+
+Plugin can also read/write the co-ordinates of the image within the parent div to/from a (probably hidden) form field for easy integration into your own projects.
+
+Live example available at: http://benlumley.co.uk/dev/panzoom/example/index.html",
+    "keywords": [
+        "pan",
+        "zoom",
+        "photo",
+        "picture",
+        "panzoom",
+        "mouse",
+        "drag",
+        "widget"
+    ],
+    "homepage": "http://benlumley.co.uk/dev/panzoom/example/index.html",
+    "contributors": [
+        {
+            "name": "Ben Lumley",
+            "url": "https://github.com/gnarf37"
+        }
+    ],
+    "files": [
+        "jquery.panzoom.js"
+    ]
+}
