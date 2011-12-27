@@ -2,7 +2,7 @@
  * jQuery PanZoom Plugin
  * Pan and zoom an image within a parent div.
  *
- * version: 0.9.0
+ * version: 0.10.0
  * @requires jQuery v1.4.2 or later (earlier probably work, but untested so far)
  *
  * Copyright (c) 2011 Ben Lumley
@@ -216,7 +216,7 @@
 				event.preventDefault(); event.data.target.panZoom('mouseDown', 'zoomIn'); 
 			}).bind('mouseleave.panZoom mouseup.panZoom', eventData, function(event) {
 				event.preventDefault(); event.data.target.panZoom('mouseUp');
-			});
+			}).bind('click', function (event) { event.preventDefault() } );
 		}
 		
 		if (settings.zoomOut) { 
@@ -224,7 +224,7 @@
 				event.preventDefault(); event.data.target.panZoom('mouseDown', 'zoomOut'); 
 			}).bind('mouseleave.panZoom mouseup.panZoom', eventData, function(event) {
 				event.preventDefault(); event.data.target.panZoom('mouseUp');
-			}); 
+			}).bind('click', function (event) { event.preventDefault() } );
 		}
 		
 		if (settings.panUp) { 
@@ -232,7 +232,7 @@
 				event.preventDefault(); event.data.target.panZoom('mouseDown', 'panUp'); 
 			}).bind('mouseleave.panZoom mouseup.panZoom', eventData, function(event) {
 				event.preventDefault(); event.data.target.panZoom('mouseUp');
-			}); 
+			}).bind('click', function (event) { event.preventDefault() } ); 
 		}
 		
 		if (settings.panDown) { 
@@ -240,7 +240,7 @@
 				event.preventDefault(); event.data.target.panZoom('mouseDown', 'panDown'); 
 			}).bind('mouseleave.panZoom mouseup.panZoom', eventData, function(event) {
 				event.preventDefault(); event.data.target.panZoom('mouseUp');
-			});
+			}).bind('click', function (event) { event.preventDefault() } );
 		}
 		
 		if (settings.panLeft) { 
@@ -248,7 +248,7 @@
 				event.preventDefault(); event.data.target.panZoom('mouseDown', 'panLeft'); 
 			}).bind('mouseleave.panZoom mouseup.panZoom', eventData, function(event) {
 				event.preventDefault(); event.data.target.panZoom('mouseUp');
-			}); 
+			}).bind('click', function (event) { event.preventDefault() } ); 
 		}
 		
 		if (settings.panRight) { 
@@ -256,7 +256,7 @@
 				event.preventDefault(); event.data.target.panZoom('mouseDown', 'panRight'); 
 			}).bind('mouseleave.panZoom mouseup.panZoom', eventData, function(event) {
 				event.preventDefault(); event.data.target.panZoom('mouseUp');
-			});
+			}).bind('click', function (event) { event.preventDefault() } );
 		}
 			
 		if (settings.fit) { settings.fit.bind('click.panZoom', eventData, function(event) { event.preventDefault(); event.data.target.panZoom('fit'); } ); }
