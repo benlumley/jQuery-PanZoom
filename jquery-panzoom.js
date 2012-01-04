@@ -283,7 +283,7 @@
 
 		// double click
 		if (settings.double_click) {
-			this.bind('dblclick.panZoom', eventData, function(event, delta) { event.data.target.panZoom('zoomIn') } );
+			this.bind('dblclick.panZoom', eventData, function(event) { event.data.target.panZoom('zoomIn') } );
 			// no need to record in bound elements array - gets done anyway when imageload is bound
 		}
 		
