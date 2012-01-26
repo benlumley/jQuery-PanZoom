@@ -28,34 +28,34 @@
   };
 
   $.fn.panZoom.defaults = {
-    zoomIn   					: 	false,
-    zoomOut 					: 	false,
-    panUp							:		false,
-    panDown						:		false,
-    panLeft						:		false,
-    panRight					:		false,
-    fit								: 	false,
-    destroy           :   false,
-    out_x1						:		false,
-    out_y1						:		false,
-    out_x2						:		false,
-    out_y2						:		false,
-    min_width					:   20,
-    min_height 				:   20,
-    zoom_step					:   3,
-    pan_step  				:   3,
-    debug							: 	false,
-    directedit				:   false,
-    aspect    				:   true,
-    factor    				:   1,
-    animate   				:   true,
-    animate_duration	: 	200,
-    animate_easing		: 	'linear',
-    double_click	 		: 	true,
-    mousewheel				: 	true,
-    mousewheel_delta	: 	1,
-    draggable					:   true,
-    clickandhold			: 	true 
+    zoomIn            : false,
+    zoomOut           : false,
+    panUp             : false,
+    panDown           : false,
+    panLeft           : false,
+    panRight          : false,
+    fit               : false,
+    destroy           : false,
+    out_x1            : false,
+    out_y1            : false,
+    out_x2            : false,
+    out_y2            : false,
+    min_width         : 20,
+    min_height        : 20,
+    zoom_step         : 3,
+    pan_step          : 3,
+    debug             : false,
+    directedit        : false,
+    aspect            : true,
+    factor            : 1,
+    animate           : true,
+    animate_duration  : 200,
+    animate_easing    : 'linear',
+    double_click      : true,
+    mousewheel        : true,
+    mousewheel_delta  : 1,
+    draggable         : true,
+    clickandhold      : true 
   };
 
   var settings = {}
@@ -171,7 +171,7 @@
 
     'mouseWheel': function (delta) {
       // first calculate how much to zoom in/out
-      var steps = getStepDimensions.apply(this);		
+      var steps = getStepDimensions.apply(this);
       steps.zoom.x = steps.zoom.x * (Math.abs(delta) / settings.mousewheel_delta);
       steps.zoom.y = steps.zoom.y * (Math.abs(delta) / settings.mousewheel_delta);
 
@@ -303,9 +303,9 @@
 
     if (settings.draggable && typeof(this.draggable) == 'function') {
       this.draggable({
-        stop: function () { $(this).panZoom('dragComplete');	}
+        stop: function () { $(this).panZoom('dragComplete'); }
       });
-    }	else if (settings.draggable) {
+    } else if (settings.draggable) {
       alert('Draggable requires jQuery UI - please include jQuery UI or disable draggable to remove this warning.')
     }
 
@@ -418,11 +418,11 @@
   }
 
   function applyCSS() {
-    this.css(	properties );
+    this.css( properties );
   }
 
   function applyAnimate() {
-    this.stop().animate(	properties , settings.animate_duration, settings.animate_easing);		
+    this.stop().animate( properties , settings.animate_duration, settings.animate_easing);
   }
 
   function getWidth() {
