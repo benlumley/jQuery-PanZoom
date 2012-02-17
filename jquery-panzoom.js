@@ -99,9 +99,10 @@
     },
 
     'updatePosition': function() {
-      validatePosition.apply(this);
-      writePosition.apply(this);
-      applyPosition.apply(this);
+      if (validatePosition.apply(this)) {
+        writePosition.apply(this);
+        applyPosition.apply(this);
+      }
     },
 
     'fit': function () {
@@ -350,9 +351,12 @@
   }
 
   function validatePosition() {
+    var valid = true;
     var data = this.data('panZoom');
     // if dimensions are too small...
     if ( data.position.x2 - data.position.x1 < settings.min_width/settings.factor || data.position.y2 - data.position.y1 < settings.min_height/settings.factor ) {
+      valid = false;
+
       // and second co-ords are zero (IE: no dims set), fit image
       if (data.position.x2 == 0 || data.position.y2 == 0) {
         methods.fit.apply(this);
@@ -384,7 +388,7 @@
       }
     }
 
-
+    return valid;
   }
 
   function applyPosition() {
