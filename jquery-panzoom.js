@@ -481,10 +481,12 @@
     img.src = this.attr('src');
     img.id = "jqpz-temp";
     $('body').append(img);
-    data.target_dimensions.x = $('#jqpz-temp').width();
-    data.target_dimensions.y = $('#jqpz-temp').height();
-    $('#jqpz-temp').remove();
-    data.target_dimensions.ratio = data.target_dimensions.x / data.target_dimensions.y;
+    $('#jqpz-temp').load(function() {
+        data.target_dimensions.x = $('#jqpz-temp').width();
+        data.target_dimensions.y = $('#jqpz-temp').height();
+        $('#jqpz-temp').remove();
+        data.target_dimensions.ratio = data.target_dimensions.x / data.target_dimensions.y;
+    });
   }
 
 })( jQuery );
